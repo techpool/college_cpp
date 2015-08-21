@@ -59,7 +59,7 @@ class students{
 
 		void display_grade(){
 			calculate_grade();
-			cout << "\Grade obtained = " << grade;
+			cout << "\nGrade obtained = " << grade;
 		}
 };
 
