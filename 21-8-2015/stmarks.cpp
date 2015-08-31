@@ -1,9 +1,11 @@
-#include<iostream.h>
+#include<iostream>
+using namespace std;
 class students{
 	private:
 		int sub1, sub2, sub3, sub4, sub5;
 		float average;
 		char grade;
+		char* n;
 
 		void calculate_average(){
 			average = (sub1 + sub2 + sub3 + sub4 + sub5)/5;
@@ -35,15 +37,17 @@ class students{
 			average = 0;
 		}
 
-		void setInput(int a, int b, int c, int d, int e){
+		void setInput(char name[],int a, int b, int c, int d, int e){
 			sub1 = a;
 			sub2 = b;
 			sub3 = c;
 			sub4 = d;
 			sub5 = e;
+			n = name;
 		}
 
 		void display_marks(){
+            cout << "\nName : " << n;
 			cout << "\nMarks obtained == \n";
 			cout << "Subject 1 = " << sub1 << endl;
 			cout << "Subject 2 = " << sub2 << endl;
@@ -67,7 +71,9 @@ class students{
 int main(){
 	students s1;
 	int sub1, sub2, sub3, sub4, sub5;
-
+	char name[20];
+    cout << "\nEnter your name : ";
+    cin >> name;
 	cout << "\nEnter your marks ==\n";
 	cout << "Subject 1 = ";
 	cin >> sub1;
@@ -80,7 +86,7 @@ int main(){
 	cout << "Subject 5 = ";
 	cin >> sub5;
 
-	s1.setInput(sub1, sub2, sub3, sub4, sub5);
+	s1.setInput(name, sub1, sub2, sub3, sub4, sub5);
 	s1.display_marks();
 	s1.display_average();
 	s1.display_grade();
