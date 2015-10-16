@@ -5,7 +5,7 @@ class students{
 		int sub1, sub2, sub3, sub4, sub5;
 		float average;
 		char grade;
-		char* n;
+		char n[20];
 
 		void calculate_average(){
 			average = (sub1 + sub2 + sub3 + sub4 + sub5)/5;
@@ -43,7 +43,10 @@ class students{
 			sub3 = c;
 			sub4 = d;
 			sub5 = e;
-			n = name;
+			copy(name, name + 10, n);
+
+			calculate_average();
+			calculate_grade();
 		}
 
 		void display_marks(){
@@ -57,39 +60,61 @@ class students{
 		}
 
 		void display_average(){
-			calculate_average();
 			cout << "\nAverage of the marks obtained = " << average << endl;
 		}
 
 		void display_grade(){
-			calculate_grade();
 			cout << "\nGrade obtained = " << grade;
+		}
+
+		float get_average(){
+            return average;
 		}
 };
 
 
 int main(){
-	students s1;
-	int sub1, sub2, sub3, sub4, sub5;
+	students s[10];
+	students maxStudent;
+	int sub1, sub2, sub3, sub4, sub5, n, i;
 	char name[20];
-    cout << "\nEnter your name : ";
-    cin >> name;
-	cout << "\nEnter your marks ==\n";
-	cout << "Subject 1 = ";
-	cin >> sub1;
-	cout << "Subject 2 = ";
-	cin >> sub2;
-	cout << "Subject 3 = ";
-	cin >> sub3;
-	cout << "Subject 4 = ";
-	cin >> sub4;
-	cout << "Subject 5 = ";
-	cin >> sub5;
 
-	s1.setInput(name, sub1, sub2, sub3, sub4, sub5);
-	s1.display_marks();
-	s1.display_average();
-	s1.display_grade();
+	cout << "Enter the number of students you have: ";
+	cin >> n;
+	for(i = 0; i < n; i++){
+
+        cout << "\nEnter name : ";
+        cin >> name;
+        cout << "\nEnter marks ==\n";
+        cout << "Subject 1 = ";
+        cin >> sub1;
+        cout << "Subject 2 = ";
+        cin >> sub2;
+        cout << "Subject 3 = ";
+        cin >> sub3;
+        cout << "Subject 4 = ";
+        cin >> sub4;
+        cout << "Subject 5 = ";
+        cin >> sub5;
+        s[i].setInput(name, sub1, sub2, sub3, sub4, sub5);
+
+	}
+
+    maxStudent = s[0];
+
+    for(i = 1; i < n; i++){
+        if(maxStudent.get_average() < s[i].get_average()){
+            maxStudent = s[i];
+        } else {
+            continue;
+        }
+    }
+
+
+    cout << "\n==DETAILS OF STUDENT WHO OBTAINED MAX MARKS==\n";
+    maxStudent.display_marks();
+    maxStudent.display_average();
+    maxStudent.display_grade();
 
 	return 0;
 }
